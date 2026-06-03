@@ -1,4 +1,4 @@
-.PHONY: dev build clean
+.PHONY: dev build
 
 dev:
 	@echo "starting live-reload development server..."
@@ -6,5 +6,5 @@ dev:
 
 build:
 	@echo "Building production binary..."
-	@mkdir -p dest/
-	go build -o dest/server cmd/server/main.go
+	@mkdir -p .dest/
+	go build -o .dest/server cmd/server/main.go
