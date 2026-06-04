@@ -1,16 +1,17 @@
 package main
 
 import (
+	"strconv"
+
 	"github.com/gin-gonic/gin"
-	"net/http"
+	subRouters "github.com/shivendra-dev54/auction_app/backend/src/routers"
 )
 
 func main() {
+	const PORT uint64 = 64000
 	router := gin.Default()
-	router.GET("/ping", func(c *gin.Context) {
-		c.JSON(http.StatusOK, gin.H{
-			"message": "pong",
-		})
-	})
-	router.Run()
+
+	subRouters.AuthRouter(router)
+
+	router.Run("localhost:" + strconv.FormatUint(PORT, 10))
 }
