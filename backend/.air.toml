@@ -2,7 +2,7 @@ root = "."
 tmp_dir = ".dest"
 
 [build]
-  cmd = "go build -o ./.dest/server cmd/server/main.go"
+  cmd = "go build -o ./.dest/server src/main.go"
   bin = "./.dest/server"
   include_ext = ["go"]
   exclude_dir = [".dest"]
