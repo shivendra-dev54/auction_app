@@ -1,6 +1,7 @@
 package main
 
 import (
+	"log"
 	"strconv"
 
 	"github.com/gin-gonic/gin"
@@ -19,7 +20,11 @@ func main() {
 	subRouters.AuthRouter(router)
 
 	dbInstance := db.DatabaseInitializer()
-	db.MigrateModels(dbInstance)
+	if dbInstance != nil {
+		db.MigrateModels(dbInstance)
+	} else {
+		log.Print("\n\n\n" + "UNABLE TO CONNECT TO DATABASE !" + "\n\n\n")
+	}
 
 	router.Run("localhost:" + strconv.FormatUint(uint64(PORT), 10))
 }

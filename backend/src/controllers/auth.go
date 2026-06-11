@@ -15,22 +15,8 @@ func SignUpController(c *gin.Context) {
 	c.ShouldBindJSON(&body)
 
 	err := services.SignUpService(&body)
-
-	switch err {
-	case customErrors.DatabaseError:
-		customErrors.DatabaseErrorHandler(c)
-		return
-	case customErrors.DuplicateDataError:
-		customErrors.DuplicateDataErrorHandler(c)
-		return
-	case customErrors.InvalidDataError:
-		customErrors.InvalidDataErrorHandler(c)
-		return
-	case customErrors.InvalidRequestError:
-		customErrors.InvalidRequestErrorHandler(c)
-		return
-	case customErrors.NotFoundError:
-		customErrors.NotFoundErrorHandler(c)
+	if err != nil {
+		customErrors.GlobalHandler(c, err)
 		return
 	}
 
@@ -45,4 +31,3 @@ func SignUpController(c *gin.Context) {
 		resp,
 	)
 }
-

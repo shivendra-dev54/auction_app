@@ -43,7 +43,6 @@ func SignUpService(
 		Email:    Email,
 		Password: Password,
 	}
-
 	result := db.Create(&newUser)
 
 	if result.Error != nil {
