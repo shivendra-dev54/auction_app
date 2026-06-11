@@ -21,7 +21,8 @@ func DatabaseInitializer() *gorm.DB {
 	dbInstance, err = gorm.Open(postgres.Open(dsn), &gorm.Config{})
 
 	if err != nil {
-		log.Fatalf("Failed to connect to database")
+		log.Print("Failed to connect to database")
+		return nil
 	}
 
 	return dbInstance

@@ -8,7 +8,7 @@ type SignUpBodyParams struct {
 }
 
 // sign in
-type SignInParams struct {
+type SignInBodyParams struct {
 	Email    string `json:"email" binding:"required,email"`
 	Password string `json:"password" binding:"required,min=6"`
 }
