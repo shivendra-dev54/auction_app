@@ -1,7 +1,6 @@
 package controllers
 
 import (
-	"log"
 	"net/http"
 
 	"github.com/gin-gonic/gin"
@@ -94,11 +93,10 @@ func RefreshController(c *gin.Context) {
 		customErrors.GlobalHandler(c, err)
 		return
 	}
-	
+
 	err = services.RefreshService(refresh_token, &cookies)
 	if err != nil {
 		cookieResetHandler(c)
-		log.Println("\n\n\n" + "this is where it happened")
 		customErrors.GlobalHandler(c, err)
 		return
 	}
@@ -154,5 +152,20 @@ func cookieResetHandler(
 		"localhost",
 		true,
 		true,
+	)
+}
+
+func LogoutController(c *gin.Context) {
+	cookieResetHandler(c)
+
+	resp := types.ApiResponse[*types.UserInfo]{
+		Code:    http.StatusAccepted,
+		Status:  true,
+		Message: "logged out successfully!",
+		Data:    nil,
+	}
+	c.JSON(
+		http.StatusAccepted,
+		resp,
 	)
 }
