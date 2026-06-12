@@ -9,4 +9,5 @@ func AuthRouter(router *gin.Engine) {
 	authRouter := router.Group("/auth")
 	authRouter.POST("/sign_up", controllers.SignUpController)
 	authRouter.POST("/sign_in", controllers.SignInController)
+	authRouter.POST("/refresh", controllers.RefreshController)
 }
