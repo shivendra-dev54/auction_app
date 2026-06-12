@@ -10,7 +10,7 @@ import (
 var DatabaseError error = errors.New("Database Error.")
 
 func DatabaseErrorHandler(c *gin.Context) {
-	resp := types.ApiResponse[*types.SignUpBodyParams]{
+	resp := types.ApiResponse[error]{
 		Code:    405,
 		Status:  false,
 		Message: "Database Error.",

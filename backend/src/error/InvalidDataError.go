@@ -10,7 +10,7 @@ import (
 var InvalidDataError error = errors.New("Invalid Data.")
 
 func InvalidDataErrorHandler(c *gin.Context) {
-	resp := types.ApiResponse[*types.SignUpBodyParams]{
+	resp := types.ApiResponse[error]{
 		Code:    401,
 		Status:  false,
 		Message: "Invalid Data.",

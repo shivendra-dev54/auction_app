@@ -10,7 +10,7 @@ import (
 var InvalidRequestError error = errors.New("Invalid Request.")
 
 func InvalidRequestErrorHandler(c *gin.Context) {
-	resp := types.ApiResponse[*types.SignUpBodyParams]{
+	resp := types.ApiResponse[error]{
 		Code:    402,
 		Status:  false,
 		Message: "Invalid Request.",

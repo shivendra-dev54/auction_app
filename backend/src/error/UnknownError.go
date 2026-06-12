@@ -7,17 +7,17 @@ import (
 	"github.com/shivendra-dev54/auction_app/backend/src/types"
 )
 
-var NotFoundError error = errors.New("Not Found!")
+var UnknownError error = errors.New("Something went wrong.")
 
-func NotFoundErrorHandler(c *gin.Context) {
+func UnknownErrorHandler(c *gin.Context, msg string) {
 	resp := types.ApiResponse[error]{
-		Code:    404,
+		Code:    406,
 		Status:  false,
-		Message: "Not Found!",
+		Message: msg,
 		Data:    nil,
 	}
 	c.JSON(
-		404,
+		406,
 		resp,
 	)
 }

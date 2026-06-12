@@ -8,8 +8,9 @@ import (
 )
 
 var (
-	PORT      string
-	DB_STRING string
+	port          string
+	db_string     string
+	cookie_secret string
 )
 
 func loadEnv() {
@@ -19,20 +20,28 @@ func loadEnv() {
 		return
 	}
 
-	PORT = os.Getenv("PORT")
-	DB_STRING = os.Getenv("DB_STRING")
+	port = os.Getenv("PORT")
+	db_string = os.Getenv("DB_STRING")
+	cookie_secret = os.Getenv("COOKIE_SECRET")
 }
 
 func GetPortNumber() string {
-	if PORT == "" {
+	if port == "" {
 		loadEnv()
 	}
-	return PORT
+	return port
 }
 
 func GetDbString() string {
-	if DB_STRING == "" {
+	if db_string == "" {
 		loadEnv()
 	}
-	return DB_STRING
+	return db_string
+}
+
+func GetCookieSecret() string {
+	if cookie_secret == "" {
+		loadEnv()
+	}
+	return cookie_secret
 }

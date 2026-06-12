@@ -29,7 +29,7 @@ func SignUpService(
 
 	var existingProduct models.User
 	err := db.Where("Email = ?", Email).First(&existingProduct).Error
-	
+
 	if err == nil {
 		return customErrors.DuplicateDataError
 	}
@@ -38,10 +38,12 @@ func SignUpService(
 		return customErrors.DatabaseError
 	}
 
+	hashedPass, err := HashPassword(Password)
+
 	newUser := models.User{
 		FullName: FullName,
 		Email:    Email,
-		Password: Password,
+		Password: hashedPass,
 	}
 	result := db.Create(&newUser)
 

@@ -10,7 +10,7 @@ import (
 var DuplicateDataError error = errors.New("Data Duplication Error.")
 
 func DuplicateDataErrorHandler(c *gin.Context) {
-	resp := types.ApiResponse[*types.SignUpBodyParams]{
+	resp := types.ApiResponse[error]{
 		Code:    403,
 		Status:  false,
 		Message: "Data Duplication Error.",
