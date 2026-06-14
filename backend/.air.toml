@@ -6,3 +6,7 @@ tmp_dir = ".dest"
   bin = "./.dest/server"
   include_ext = ["go"]
   exclude_dir = [".dest"]
+  kill_delay = "1s"
+
+[proxy]
+  enabled = true
