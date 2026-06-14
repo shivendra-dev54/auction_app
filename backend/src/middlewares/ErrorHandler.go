@@ -11,9 +11,9 @@ func ErrorHandlerMiddleware() gin.HandlerFunc {
 	return func(c *gin.Context) {
 		defer func() {
 			if err := recover(); err != nil {
-				resp := types.ApiResponse[*types.SignUpBodyParams]{
+				resp := types.ApiResponse[error]{
 					Code:    http.StatusBadRequest,
-					Status:  true,
+					Status:  false,
 					Message: "Something went wrong!",
 					Data:    nil,
 				}

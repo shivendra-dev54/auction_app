@@ -12,19 +12,21 @@ import (
 )
 
 func main() {
-	PORT, _ := strconv.Atoi(utils.GetPortNumber())
-	router := gin.Default()
-
-	router.Use(middlewares.ErrorHandlerMiddleware())
-
-	subRouters.AuthRouter(router)
-
 	dbInstance := db.DatabaseInitializer()
 	if dbInstance != nil {
 		db.MigrateModels(dbInstance)
 	} else {
 		log.Print("\n\n\n" + "UNABLE TO CONNECT TO DATABASE !" + "\n\n\n")
 	}
+
+	PORT, _ := strconv.Atoi(utils.GetPortNumber())
+	router := gin.Default()
+
+	router.Use(middlewares.ErrorHandlerMiddleware())
+	subRouters.AuthRouter(router)
+
+	router.Use(middlewares.AuthMiddleware())
+	subRouters.ItemRouter(router)
 
 	router.Run("localhost:" + strconv.FormatUint(uint64(PORT), 10))
 }
