@@ -13,4 +13,5 @@ func ItemRouter(router *gin.Engine) {
 	itemRouter.POST("/", item_controller.CreateNewItemController)
 
 	itemRouter.PUT("/:id", item_controller.UpdateItemController)
+	itemRouter.DELETE("/:id", item_controller.DeleteItemController)
 }
