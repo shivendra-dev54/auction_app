@@ -46,7 +46,6 @@ func CreateNewItem(
 	createdItem.ItemName = itemInfo.ItemName
 	createdItem.BasePrice = itemInfo.BasePrice
 	createdItem.Desc = itemInfo.Desc
-	createdItem.IsSold = false
 
 	return nil
 }

@@ -11,4 +11,6 @@ func ItemRouter(router *gin.Engine) {
 	router.Use(middlewares.AuthMiddleware())
 	itemRouter.GET("/", item_controller.GetAllItemsController)
 	itemRouter.POST("/", item_controller.CreateNewItemController)
+
+	itemRouter.PUT("/:id", item_controller.UpdateItemController)
 }
