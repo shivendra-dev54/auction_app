@@ -34,6 +34,10 @@ func UpdateItemService(
 		return types.ItemInfo{}, customErrors.NotFoundError
 	}
 
+	if item.OwnerID != user.ID {
+		return types.ItemInfo{}, customErrors.UnAuthorizedError
+	}
+
 	if itemInfo.ItemName != "" {
 		item.ItemName = itemInfo.ItemName
 	}
