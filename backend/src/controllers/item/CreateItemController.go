@@ -1,7 +1,6 @@
 package item_controller
 
 import (
-	"log"
 	"net/http"
 
 	"github.com/gin-gonic/gin"
@@ -11,7 +10,6 @@ import (
 )
 
 func CreateNewItemController(c *gin.Context) {
-	log.Println("this is IMPORTANT: ")
 	val, exists := c.Get("userMail")
 	if !exists {
 		customErrors.UnAuthorizedErrorHandler(c)
