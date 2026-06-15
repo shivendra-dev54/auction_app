@@ -5,7 +5,6 @@ import (
 	"net/http"
 
 	"github.com/gin-gonic/gin"
-	auth_controllers_utils "github.com/shivendra-dev54/auction_app/backend/src/controllers/auth/utils"
 	"github.com/shivendra-dev54/auction_app/backend/src/services"
 	"github.com/shivendra-dev54/auction_app/backend/src/types"
 )
@@ -15,21 +14,18 @@ func AuthMiddleware() gin.HandlerFunc {
 
 		accessToken, err := c.Cookie("access_token")
 		if err != nil {
-			auth_controllers_utils.CookieResetHandler(c)
 			badAuthResponseHandler(c)
 			return
 		}
 
 		byteToken, err := base64.URLEncoding.DecodeString(accessToken)
 		if err != nil {
-			auth_controllers_utils.CookieResetHandler(c)
 			badAuthResponseHandler(c)
 			return
 		}
 
 		payload, err := services.DeCipherToken(byteToken)
 		if err != nil {
-			auth_controllers_utils.CookieResetHandler(c)
 			badAuthResponseHandler(c)
 			return
 		}
