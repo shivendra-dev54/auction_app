@@ -1,4 +1,4 @@
-package item_controller
+package purchased_controllers
 
 import (
 	"net/http"
@@ -10,7 +10,7 @@ import (
 	"github.com/shivendra-dev54/auction_app/backend/src/types"
 )
 
-func GetAllItemsController(c *gin.Context) {
+func ReadPurchasedController(c *gin.Context) {
 	val, exists := c.Get("userMail")
 	if !exists {
 		customErrors.UnAuthorizedErrorHandler(c)
@@ -20,7 +20,7 @@ func GetAllItemsController(c *gin.Context) {
 	userEmail := val.(string)
 
 	var fetchedItems []models.Item
-	err := services.ReadItemService(userEmail, &fetchedItems)
+	err := services.ReadPurchasedService(userEmail, &fetchedItems)
 	if err != nil {
 		customErrors.GlobalHandler(c, err)
 		return
@@ -29,7 +29,7 @@ func GetAllItemsController(c *gin.Context) {
 	resp := types.ApiResponse[*[]models.Item]{
 		Code:    http.StatusAccepted,
 		Status:  true,
-		Message: "Fetched all items.",
+		Message: "Fetched all purchased items.",
 		Data:    &fetchedItems,
 	}
 	c.JSON(

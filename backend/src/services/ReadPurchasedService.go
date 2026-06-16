@@ -7,7 +7,7 @@ import (
 	"gorm.io/gorm"
 )
 
-func ReadItemService(
+func ReadPurchasedService(
 	userEmail string,
 	fetchedItems *[]models.Item,
 ) error {
@@ -40,7 +40,7 @@ func ReadItemService(
 		"owner_id = ?",
 		user.ID,
 	).Where(
-		"first_owner_id = ?",
+		"first_owner_id != ?",
 		user.ID,
 	).Find(&fetchedItems).Error
 
