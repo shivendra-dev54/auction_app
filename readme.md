@@ -1,6 +1,15 @@
 # AUCTION APP
 
 ### Techstack
+* Backend:
+  * Go language
+  * Gin framework
+  * Gorm
+  * Gorilla websockets
 
-- react
-- go
+* Frontend:
+  * TypeScript
+  * React
+  * Sonner
+  * Tailwindcss
+  * React Router

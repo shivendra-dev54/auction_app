@@ -5,29 +5,35 @@ import (
 	"strconv"
 
 	"github.com/gin-gonic/gin"
+	"github.com/shivendra-dev54/auction_app/backend/src/config"
 	"github.com/shivendra-dev54/auction_app/backend/src/db"
 	"github.com/shivendra-dev54/auction_app/backend/src/middlewares"
-	subRouters "github.com/shivendra-dev54/auction_app/backend/src/routers"
-	"github.com/shivendra-dev54/auction_app/backend/src/utils"
+	"github.com/shivendra-dev54/auction_app/backend/src/routers"
 )
 
 func main() {
-	dbInstance := db.DatabaseInitializer()
-	if dbInstance != nil {
-		db.MigrateModels(dbInstance)
-	} else {
-		log.Print("\n\n\n" + "UNABLE TO CONNECT TO DATABASE !" + "\n\n\n")
+	err := config.EnvVariablesLoader()
+	if err != nil {
+		log.Fatalln("UNABLE TO LOAD ENVIROMENT VARIABLES !")
 	}
 
-	PORT, _ := strconv.Atoi(utils.GetPortNumber())
+	dbInstance, err := db.DatabaseInitializer()
+	if err == nil {
+		db.MigrationHandler(dbInstance)
+	} else {
+		log.Fatalln("UNABLE TO CONNECT TO DATABASE !")
+	}
+
+	PORT, _ := strconv.Atoi(config.Port)
 	router := gin.Default()
 
 	router.Use(middlewares.ErrorHandlerMiddleware())
-	subRouters.AuthRouter(router)
+	custom_routers.HealthRouter(router)
+	custom_routers.AuthRouter(router)
 
 	router.Use(middlewares.AuthMiddleware())
-	subRouters.ItemRouter(router)
-	subRouters.PurchasedRouter(router)
+	custom_routers.ItemRouter(router)
+	custom_routers.PurchasedRouter(router)
 
 	router.Run("localhost:" + strconv.FormatUint(uint64(PORT), 10))
 }
