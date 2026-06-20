@@ -34,6 +34,7 @@ func main() {
 	router.Use(middlewares.AuthMiddleware())
 	custom_routers.ItemRouter(router)
 	custom_routers.PurchasedRouter(router)
+	custom_routers.SocketRouter(router)
 
 	router.Run("localhost:" + strconv.FormatUint(uint64(PORT), 10))
 }
