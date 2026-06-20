@@ -3,6 +3,12 @@
 ### starting the server
 
 - make sure you have go installed on your machine.
+- install air for hot reload.
+
+```bash
+go install github.com/air-verse/air@latest
+```
+
 - setup the enviroment variables.
 
 ```bash
