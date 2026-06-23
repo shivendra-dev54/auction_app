@@ -73,3 +73,63 @@ COOKIE_SECRET=this_is_some_random_thing_of_l32
 | `/api/item/:id`     | PUT    | to update item.                                              |
 | `/api/item/:id`     | DELETE | to delete item.                                              |
 | `/api/purchased`    | GET    | to read all the purchased items (purchased through auction.) |
+
+## websocket
+
+### example messages
+
+```json
+{
+  "action": "list",
+  "item_id": 0,
+  "bid": 0
+}
+```
+
+```json
+{
+  "action": "host",
+  "item_id": 1,
+  "bid": 0
+}
+```
+
+```json
+{
+  "action": "join",
+  "item_id": 1,
+  "bid": 0
+}
+```
+
+```json
+{
+  "action": "bid",
+  "item_id": 1,
+  "bid": 500
+}
+```
+
+```json
+{
+  "action": "sell",
+  "item_id": 1,
+  "bid": 0
+}
+```
+
+```json
+{
+  "action": "exit",
+  "item_id": 0,
+  "bid": 0
+}
+```
+
+```json
+{
+  "action": "end",
+  "item_id": 0,
+  "bid": 0
+}
+```
