@@ -74,9 +74,52 @@ COOKIE_SECRET=this_is_some_random_thing_of_l32
 | `/api/item/:id`     | DELETE | to delete item.                                              |
 | `/api/purchased`    | GET    | to read all the purchased items (purchased through auction.) |
 
+---
+
+---
+
+### Body
+
+1. `/api/auth/sign_up`:
+
+```json
+{
+  "fullname": "",
+  "email": "", // not checked in the backend for email format
+  "password": "" // min length 6
+}
+```
+
+2. `/api/auth/sign_in`
+
+```json
+{
+  "email": "", // not checked in the backend for email format
+  "password": "" // min length 6
+}
+```
+
+3. `/api/item/`
+
+```json
+{
+  "name": "",
+  "price": 1,
+  "desc": ""
+}
+```
+
+this is body for both create and update endpoint, for update the fields you don't want to update should be set to `0` or `""`
+
+---
+
+---
+
 ## websocket
 
 ### example messages
+
+1. for user to list ongoing auctions.
 
 ```json
 {
@@ -86,6 +129,8 @@ COOKIE_SECRET=this_is_some_random_thing_of_l32
 }
 ```
 
+2. for user to host auction for particular item.
+
 ```json
 {
   "action": "host",
@@ -93,6 +138,8 @@ COOKIE_SECRET=this_is_some_random_thing_of_l32
   "bid": 0
 }
 ```
+
+3. for user to join a auction.
 
 ```json
 {
@@ -102,6 +149,8 @@ COOKIE_SECRET=this_is_some_random_thing_of_l32
 }
 ```
 
+4. for user to bid in an auction.
+
 ```json
 {
   "action": "bid",
@@ -109,6 +158,8 @@ COOKIE_SECRET=this_is_some_random_thing_of_l32
   "bid": 500
 }
 ```
+
+5. for host of the auction to sell the item
 
 ```json
 {
@@ -118,6 +169,8 @@ COOKIE_SECRET=this_is_some_random_thing_of_l32
 }
 ```
 
+6. for user to exit the auction.
+
 ```json
 {
   "action": "exit",
@@ -125,6 +178,8 @@ COOKIE_SECRET=this_is_some_random_thing_of_l32
   "bid": 0
 }
 ```
+
+7. for host of the auction to end auction without selling item.
 
 ```json
 {
