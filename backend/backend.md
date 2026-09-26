@@ -43,3 +43,65 @@
 {}
 ```
 
+### Item endpoints
+
+**1. Create Item**
+
+* path: `/api/items`
+* method: POST
+* body:
+
+```JSON
+{
+  "itemname": "RTX 5090"
+}
+```
+
+**2. Get All Items**
+
+* path: `/api/items`
+* method: GET
+* body:
+
+```JSON
+{}
+```
+
+**3. Get Item**
+
+* path: `/api/items/:id`
+* method: GET
+* body:
+
+```JSON
+{}
+```
+
+Example:
+
+```text
+/api/items/1
+```
+
+**4. Update Item**
+
+* path: `/api/items/:id`
+* method: PATCH
+* body:
+
+```JSON
+{
+  "itemname": "RTX 5090 Founders Edition"
+}
+```
+
+**5. Delete Item**
+
+* path: `/api/items/:id`
+* method: DELETE
+* body:
+
+```JSON
+{}
+```
+

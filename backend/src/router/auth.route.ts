@@ -5,7 +5,7 @@ import {
   signin_controller,
   refresh_controller,
   logout_controller,
-} from "../controllers/auth.controller";
+} from "../controller/auth.controller";
 
 const auth_router = express.Router();
 
