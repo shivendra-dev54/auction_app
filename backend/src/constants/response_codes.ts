@@ -44,6 +44,11 @@ export const HTTP_RESPONSE = {
     MESSAGE: "Validation failed",
   },
 
+  TOO_MANY_REQUESTS: {
+    STATUS_CODE: 429,
+    MESSAGE: "Too many requests",
+  },
+
   INTERNAL_SERVER_ERROR: {
     STATUS_CODE: 500,
     MESSAGE: "Internal server error",

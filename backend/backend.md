@@ -105,3 +105,49 @@ Example:
 {}
 ```
 
+### Auction endpoints
+
+**1. Create Auction**
+* path: `/api/auctions`
+* method: POST
+* body:
+```JSON
+{
+  "itemId": 1,
+  "startingBid": 500
+}
+
+```
+
+**2. Get Ongoing Auctions**
+
+* path: `/api/auctions/ongoing`
+* method: GET
+* body:
+
+```JSON
+{}
+
+```
+
+**3. Get Auction History**
+
+* path: `/api/auctions/history`
+* method: GET
+* body:
+
+```JSON
+{}
+
+```
+
+**4. Get Auction Details**
+
+* path: `/api/auctions/:id`
+* method: GET
+* body:
+
+```JSON
+{}
+
+```
