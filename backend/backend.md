@@ -151,3 +151,125 @@ Example:
 {}
 
 ```
+
+## WebSocket endpoints
+
+### Live Auction Room
+
+- path: `/ws/auctions/:auctionId`
+- protocol: WS
+- auth: Handshake authenticated via `access_token` cookie
+
+#### Client -> Server Messages
+
+**1. Place Bid**
+```JSON
+{
+  "type": "PLACE_BID",
+  "payload": {
+    "amount": 650
+  }
+}
+
+```
+
+**2. Finalize Winner (Host Only)**
+
+```JSON
+{
+  "type": "FINALIZE_WINNER"
+}
+
+```
+
+#### Server -> Client Events
+
+**1. Initial State (Sent upon connection)**
+
+```JSON
+{
+  "type": "INIT_ROOM_STATE",
+  "payload": {
+    "auctionId": "c8d8b9d6-5452-47d3-9f79-994df58a44ec",
+    "itemId": 1,
+    "itemName": "RTX 5090",
+    "hostId": 2,
+    "startingBid": 500,
+    "currentBid": 500,
+    "currentBidderId": null,
+    "totalBids": 0,
+    "maxBidsLimit": 100,
+    "participantsCount": 1,
+    "recentBids": []
+  }
+}
+
+```
+
+**2. User Joined Notification**
+
+```JSON
+{
+  "type": "USER_JOINED",
+  "payload": {
+    "userId": 3,
+    "username": "alex",
+    "participantsCount": 2
+  }
+}
+
+```
+
+**3. New Bid Placed**
+
+```JSON
+{
+  "type": "NEW_BID",
+  "payload": {
+    "userId": 3,
+    "username": "alex",
+    "amount": 650,
+    "createdAt": "2026-09-27T10:47:00.000Z",
+    "totalBids": 1
+  }
+}
+
+```
+
+**4. Auction Completed (Winner Selected or 100 Bids Reached)**
+
+```JSON
+{
+  "type": "AUCTION_COMPLETED",
+  "payload": {
+    "persistedAuctionId": 14,
+    "winnerId": 3,
+    "winningBid": 650
+  }
+}
+
+```
+
+**5. Auction Cancelled (Host Disconnected)**
+
+```JSON
+{
+  "type": "AUCTION_CANCELLED",
+  "payload": {
+    "reason": "Host disconnected from the auction."
+  }
+}
+
+```
+
+**6. Error Notification**
+
+```JSON
+{
+  "type": "ERROR",
+  "payload": {
+    "message": "Bid must be strictly higher than current bid: 650"
+  }
+}
+
+```

@@ -73,6 +73,7 @@ export const createAuction = async (
     startedAt: new Date(),
     participants: new Set([userId]),
     bids: [],
+    clients: new Map(),
   };
 
   activeAuctions.set(auctionId, newAuction);

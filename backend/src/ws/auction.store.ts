@@ -1,3 +1,5 @@
+import type { WebSocket } from "ws";
+
 export interface InMemBid {
   userId: number;
   username: string;
@@ -6,7 +8,7 @@ export interface InMemBid {
 }
 
 export interface InMemAuction {
-  id: string; // string UUID or numeric string for in-memory session
+  id: string;
   itemId: number;
   itemName: string;
   hostId: number;
@@ -16,6 +18,7 @@ export interface InMemAuction {
   startedAt: Date;
   participants: Set<number>;
   bids: InMemBid[];
+  clients: Map<number, Set<WebSocket>>; // userId -> active WebSockets
 }
 
 export const activeAuctions = new Map<string, InMemAuction>();
