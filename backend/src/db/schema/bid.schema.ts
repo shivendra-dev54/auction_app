@@ -13,10 +13,7 @@ export const bids = pgTable(
       .references(() => users.id)
       .notNull(),
     amount: numeric("amount", { precision: 12, scale: 2 }).notNull(),
-    created_at: timestamp("created_at").defaultNow().notNull(),
+    created_at: timestamp("created_at").notNull(),
   },
-  (table) => [
-    index("bid_auction_idx").on(table.auction_id),
-    index("bid_user_idx").on(table.user_id),
-  ],
+  (table) => [index("bid_auction_idx").on(table.auction_id)],
 );
