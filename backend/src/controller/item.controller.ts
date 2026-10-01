@@ -62,9 +62,9 @@ export const get_all_items_controller = async (
   req: Request,
   res: Response,
 ) => {
-  getUserId(req);
+  const userId = getUserId(req);
 
-  const result = await getAllItems();
+  const result = await getAllItems(userId);
 
   return res
     .status(HTTP_RESPONSE.OK.STATUS_CODE)

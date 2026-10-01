@@ -24,10 +24,11 @@ export const createItem = async (
 };
 
 
-export const getAllItems = async () => {
+export const getAllItems = async (userId: number) => {
   return db
     .select()
-    .from(item);
+    .from(item)
+    .where(eq(item.user_id, userId));
 };
 
 

@@ -1,5 +1,6 @@
 import type { Server } from "http";
 import { WebSocketServer, WebSocket } from "ws";
+import jwt from "jsonwebtoken";
 import { eq } from "drizzle-orm";
 import { db } from "../db";
 import { users } from "../db/schema/user.schema";
@@ -16,7 +17,17 @@ interface AuthUser {
 
 const parseAuth = async (reqHeaders: any): Promise<AuthUser | null> => {
   try {
-    const userId = Number(reqHeaders["x-user-id"]);
+    const cookieHeader = reqHeaders.cookie;
+    if (!cookieHeader) return null;
+    const accessToken = cookieHeader
+      .split(";")
+      .map((cookie: string) => cookie.trim())
+      .find((cookie: string) => cookie.startsWith("access_token="))
+      ?.slice("access_token=".length);
+    if (!accessToken) return null;
+
+    const { userId } = jwt.verify(accessToken, ACCESS_TOKEN_SECRET) as { userId: number };
+    if (!userId) return null;
 
     const [user] = await db
       .select({ id: users.id, username: users.username })
